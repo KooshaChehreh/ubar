@@ -19,3 +19,4 @@ COPY . /app
 EXPOSE 8000
 
 CMD ["gunicorn", "--reload", "--workers=4", "--worker-tmp-dir", "/dev/shm", "--bind=0.0.0.0:8000", "--chdir", "/app/ubar", "ubar.wsgi"]
+
