@@ -74,8 +74,6 @@ def login_verify_password(request):
     serializer.is_valid(raise_exception=True)
     phone = serializer.validated_data["phone"]
     password = serializer.validated_data["password"]
-    device_model = serializer.validated_data["device_model"]
-    device_ip = serializer.validated_data["device_ip"]
     try:
         target_user: User = User.objects.get(phone=phone)
         if target_user.is_suspended():

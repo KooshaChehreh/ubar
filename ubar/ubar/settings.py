@@ -196,3 +196,19 @@ zeycWEFI79hLQ/RIwgMuGdil91wLYa6vTcT7ejBhkGiWwCB5CPYoDBfjnF5SGVss
 vtXIzk+q7Pi5y9rFycyH8EIdLfqH/v9vDWADgTqA30M63ZNonO8IoDUSgS9zNcFt
 4wIDAQAB
 -----END PUBLIC KEY-----"""
+
+
+# OTP and PASSWORD
+OTP_EXPIRE_TIME_SEC = 5 * 60  # how long an OTP is valid?
+OTP_RESEND_DELAY_SEC = (
+    2 * 60
+)  # how much user should wait until asking to resending the otp
+OTP_BAN_TIME_SEC = (
+    2 * 60
+)  # how long user should be banned after passing max retries_count
+OTP_MAX_RETRY_COUNTS = 5  # max retries for otp
+OTP_DIGITS = 4
+OTP_LOWER_BOUND = 10 ** (OTP_DIGITS - 1)
+OTP_UPPER_BOUND = (10**OTP_DIGITS) - 1
+PASSWORD_MAX_LENGTH = 25
+PASSWORD_MIN_LENGTH = 8
