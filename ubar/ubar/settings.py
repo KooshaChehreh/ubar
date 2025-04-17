@@ -148,7 +148,7 @@ REST_FRAMEWORK = {
         "rest_framework.parsers.MultiPartParser",
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
-    'users.authentication.IsAuthenticatedWithToken',
+    'user.authentication.IsAuthenticatedWithToken',
 ]
 }
 

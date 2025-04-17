@@ -23,7 +23,7 @@ from user.exceptions import *
 from user.jwt_auth import (
     generate_access_token,
 )
-from utils import get_client_ip
+from user.utils import get_client_ip
 
 
 @api_view(["POST"])

@@ -27,7 +27,7 @@ class OTPAdmin(admin.ModelAdmin):
         "phone",
         "code",
         "retries_count",
-        "ip_address"
+        "ip_address",
         "created_at",
         "sent_at",
         "limited_at",
