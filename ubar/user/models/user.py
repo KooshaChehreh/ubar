@@ -30,6 +30,13 @@ class User(models.Model):
         verbose_name="تلفن همراه",
     )
 
+    email = models.EmailField(
+        max_length=256,
+        blank=True,
+        null=True,
+        verbose_name="ایمیل",
+    )
+
     password = models.CharField(
         max_length=128,
         blank=True,
@@ -106,4 +113,21 @@ class User(models.Model):
         verbose_name_plural = "کاربران"
         ordering = ["-id"]
 
-    
+
+class UserLoginAttempt(models.Model):
+    phone = models.CharField(
+        max_length=11,
+        validators=[phone_validator],
+        verbose_name="تلفن همراه",
+    )
+    ip_address = models.CharField(
+        verbose_name=_("آدرس IP"),
+    )
+    retries_count = models.IntegerField(
+        default=0,
+        verbose_name=_("تعداد تلاش مجدد"),
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True, db_index=True, verbose_name="ایجاد شده در"
+    )
+

@@ -147,6 +147,9 @@ REST_FRAMEWORK = {
         "rest_framework.parsers.FormParser",
         "rest_framework.parsers.MultiPartParser",
     ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+    'users.authentication.IsAuthenticatedWithToken',
+]
 }
 
 import os
@@ -203,12 +206,11 @@ OTP_EXPIRE_TIME_SEC = 5 * 60  # how long an OTP is valid?
 OTP_RESEND_DELAY_SEC = (
     2 * 60
 )  # how much user should wait until asking to resending the otp
-OTP_BAN_TIME_SEC = (
-    2 * 60
-)  # how long user should be banned after passing max retries_count
-OTP_MAX_RETRY_COUNTS = 5  # max retries for otp
-OTP_DIGITS = 4
+OTP_MAX_RETRY_COUNTS = 3  # max retries for otp
+OTP_DIGITS = 6
 OTP_LOWER_BOUND = 10 ** (OTP_DIGITS - 1)
 OTP_UPPER_BOUND = (10**OTP_DIGITS) - 1
 PASSWORD_MAX_LENGTH = 25
 PASSWORD_MIN_LENGTH = 8
+PASSWORD_MAX_RETRY_COUNTS = 3  # Max password failed attempts per user
+OTP_AND_PASSWORD_BAN_TIME_SEC = 3600 # Ban duration (in seconds) for phone/IP

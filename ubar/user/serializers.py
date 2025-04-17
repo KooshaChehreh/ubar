@@ -77,3 +77,20 @@ class UsersSerializer(serializers.ModelSerializer):
             user.hash_password(raw_password=raw_password)
             user.save()
         return user
+
+
+class LoginVerifyOTPInputSerializer(serializers.Serializer):
+    code = serializers.IntegerField(
+        max_value=settings.OTP_UPPER_BOUND,
+        min_value=settings.OTP_LOWER_BOUND,
+    )
+
+class ProfileInputSerializer(serializers.Serializer):
+    phone = serializers.CharField()
+    password = serializers.CharField()
+    email = serializers.EmailField()
+    name = serializers.CharField()
+    family = serializers.CharField()
+
+    def validate_phone(self, phone: str) -> str:
+        return phone_validator(phone=phone)

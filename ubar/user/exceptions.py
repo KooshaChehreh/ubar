@@ -54,6 +54,13 @@ class PhoneNowLimited(APIException):
         "message": "شماره به دلیل ورود بیش از اندازه کد اشتباه، موقتا مسدود شد.",
     }
 
+class UserNowLimited(APIException):
+    status_code = 400
+    default_code = "user_now_limited"
+    default_detail = {
+        "code": default_code,
+        "message": "اکانت شما به دلیل ورود بیش از اندازه پسورد اشتباه، موقتا مسدود شد.",
+    }
 
 class WaitToResendOTP(APIException):
     status_code = 400

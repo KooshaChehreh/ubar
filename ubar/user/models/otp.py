@@ -32,6 +32,11 @@ class OTP(models.Model):
         default=0,
         verbose_name="تعداد تلاش برای وریفای ناموفق",
     )
+    ip_address = models.CharField(
+        blank=True,
+        null=True,
+        verbose_name="آدرس IP",
+    )
 
 
     class Meta:
