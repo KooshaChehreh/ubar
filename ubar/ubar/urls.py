@@ -8,7 +8,7 @@ from django.http import HttpResponse
 
 urlpatterns = [
     # Admin
-    path("ss-admin/", admin.site.urls),
+    path("admin/", admin.site.urls),
     # Apps
-    path("api/v1/accounts/", include("user.urls")),
+    path("user/", include("user.urls")),
 ]

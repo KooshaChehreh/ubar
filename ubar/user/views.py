@@ -80,7 +80,7 @@ def login_verify_password(request):
     password = serializer.validated_data["password"]
     ip_address = get_client_ip(request=request)
     try:
-        login_attempt : UserLoginAttempt = UserLoginAttempt.objects.get(ip_address=ip_address)
+        login_attempt : UserLoginAttempt = UserLoginAttempt.objects.filter(ip_address=ip_address).first()
         target_user: User = User.objects.get(phone=phone)
         if login_attempt.retries_count == settings.PASSWORD_MAX_RETRY_COUNTS:
                 target_user.limited_at = timezone.now()
@@ -91,8 +91,10 @@ def login_verify_password(request):
             raise AccountSuspended
         if not target_user.check_password(entered_password=password):
             login_attempt.retries_count += 1
+            login_attempt.save()
             raise InvalidPhoneOrPassword
 
+        login_attempt.delete()
         access_token = generate_access_token(target_user)
         response_data = {
             "access_token": access_token,
