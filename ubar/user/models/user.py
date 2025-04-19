@@ -75,7 +75,7 @@ class User(models.Model):
             access_token = auth_header.split(" ")[1]
             payload = jwt.decode(
                 jwt=access_token,
-                key=settings.JWT_PUBLIC_KEY,
+                key=settings.LOADED_JWT_PUBLIC_KEY,
                 algorithms=["RS256"],
             )
         except (jwt.exceptions.DecodeError, jwt.exceptions.DecodeError):

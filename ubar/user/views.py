@@ -33,7 +33,6 @@ def login_obtain_otp(request):
     serializer.is_valid(raise_exception=True)
     phone = serializer.validated_data["phone"]
     ip_address = get_client_ip(request=request)
-
     otp_code = random.randint(settings.OTP_LOWER_BOUND, settings.OTP_UPPER_BOUND)
     try:
         otp = OTP.objects.get(phone=phone)
@@ -65,7 +64,6 @@ def login_obtain_otp(request):
     else:
         if user.is_suspended():
             raise AccountSuspended
-        UserLoginAttempt.objects.create(phone=phone, ip_address=ip_address)
         response_data = {
             "verify_by_password_available": True,
             "no_existing_account_with_phone": False,
@@ -83,7 +81,6 @@ def login_verify_password(request):
     ip_address = get_client_ip(request=request)
     try:
         login_attempt : UserLoginAttempt = UserLoginAttempt.objects.get(ip_address=ip_address)
-
         target_user: User = User.objects.get(phone=phone)
         if login_attempt.retries_count == settings.PASSWORD_MAX_RETRY_COUNTS:
                 target_user.limited_at = timezone.now()
@@ -94,7 +91,6 @@ def login_verify_password(request):
             raise AccountSuspended
         if not target_user.check_password(entered_password=password):
             login_attempt.retries_count += 1
-            login_attempt.save()
             raise InvalidPhoneOrPassword
 
         access_token = generate_access_token(target_user)
