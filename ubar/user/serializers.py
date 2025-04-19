@@ -19,8 +19,7 @@ class LoginVerifyOTPInputSerializer(serializers.Serializer):
 
 class LoginVerifyPasswordInputSerializer(serializers.Serializer):
     phone = serializers.CharField(max_length=11, min_length=11)
-    device_model = serializers.CharField(max_length=64)
-    device_ip = serializers.CharField(max_length=128)
+
     password = serializers.CharField(
         max_length=settings.PASSWORD_MAX_LENGTH,
         min_length=settings.PASSWORD_MIN_LENGTH,
@@ -80,6 +79,7 @@ class UsersSerializer(serializers.ModelSerializer):
 
 
 class LoginVerifyOTPInputSerializer(serializers.Serializer):
+    phone = serializers.CharField()
     code = serializers.IntegerField(
         max_value=settings.OTP_UPPER_BOUND,
         min_value=settings.OTP_LOWER_BOUND,
